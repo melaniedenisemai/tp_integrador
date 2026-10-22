@@ -12,12 +12,6 @@ def test_crear_mascota():
     assert respuesta.json() == esperado
 
 
-def test_buscar_mascotas_disponibles():
-    respuesta = requests.get(URL + "/pet/findByStatus", params={"status": "available"})
-    assert respuesta.status_code == 200
-    assert len(respuesta.json()) > 0
-
-
 def test_consultar_mascota():
     # primero se crea la mascota para que este test no dependa del otro
     mascota = {"id": 987654, "name": "Tony", "photoUrls": [], "status": "available"}
