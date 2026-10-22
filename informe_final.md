@@ -52,20 +52,15 @@
 - Evidencias: `evidencias/ui1_carga_inicial.png`, `ui2_agregar_producto.png` y `ui3_compra_completa.png`
 - Se verifico tambien que, si un test web falla, se genera una captura `ERROR_<nombre del test>.png` en `evidencias/`.
 
+
 ## 6. Incidencias encontradas
 
 No se encontraron defectos en las aplicaciones probadas, pero si surgieron estas observaciones durante el desarrollo:
 
-1. **Mensaje de confirmacion de Coffee Cart:** el elemento `.snackbar.success` aparece en pantalla unos instantes antes de tener su texto. Al leer el texto enseguida devolvia vacio y el test fallaba. Se resolvio con una espera explicita (`WebDriverWait`) en `test_compra_completa`.
-2. **Formulario de pago:** si se intenta enviar sin completar los campos, el aviso es la validacion nativa del navegador (atributo `required`) y no un mensaje propio de la aplicacion. El texto del aviso depende del idioma del navegador ("Completa este campo" en espanol), por lo que es dificil de verificar de forma estable.
-3. **Petstore es una API publica compartida:** cualquier persona puede modificar los datos, por eso los tests validan el codigo de estado y datos que enviamos nosotros, y no valores fijos del servidor. Si la API esta caida o lenta, los 3 tests de API fallan aunque el codigo este bien.
-4. **Dependencia de internet:** los tests de API y UI necesitan conexion y que los sitios esten disponibles.
+1. **Formulario de pago:** si se intenta enviar sin completar los campos, el aviso es la validacion nativa del navegador (atributo `required`) y no un mensaje propio de la aplicacion. 
 
 ## 7. Mejoras propuestas
 
-- Aplicar el patron **Page Object Model** en los tests de UI para no repetir los selectores.
 - Usar **datos externos** (CSV o JSON) para probar varias combinaciones de cafes y precios (tests data driven).
 - Agregar mas casos de UI: eliminar productos, validacion de campos obligatorios y descuentos emergentes.
 - Agregar mas casos de API: actualizar y borrar mascotas, y usar un servidor propio o un mock para no depender de la API publica.
-- Reemplazar las esperas implicitas por esperas explicitas en todos los tests web.
-- Guardar el reporte HTML y las capturas como artefactos en cada ejecucion de GitHub Actions (ya esta configurado en `main.yml`).
