@@ -1,3 +1,4 @@
+import pytest
 import requests
 
 URL = "https://petstore.swagger.io/v2"

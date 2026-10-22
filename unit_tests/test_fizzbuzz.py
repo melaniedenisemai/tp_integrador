@@ -1,3 +1,4 @@
+import pytest
 from fizzbuzz import fizzbuzz
 #Imprimir por pantalla los números del 1 al 100 
 # pero considerando lo siguiente: 
