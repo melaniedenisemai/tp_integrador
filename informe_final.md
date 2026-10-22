@@ -11,7 +11,7 @@
 ## 2. Estrategia de testing
 
 - **Unitarias:** se prueba la funcion aislada, un caso por cada regla (multiplo de 3, de 5 y de ambos).
-- **API:** se prueban peticiones reales con `requests` y se valida el codigo de estado y parte del contenido de la respuesta. Se cubre un caso de exito al crear, un caso de busqueda y un caso de error (404).
+- **API:** se prueban peticiones reales con `requests` y se valida el codigo de estado y el json de la respuesta. Se cubre un caso de exito al crear, uno de busqueda, uno de consulta de una mascota existente y uno de error (404). El test de consulta crea antes la mascota que va a pedir, para no depender de otros tests ni de lo que haya en el servidor.
 - **UI:** se automatiza el recorrido de un usuario con Selenium: carga inicial, agregar un producto y compra completa. Se usan selectores estables (`data-test`, `aria-label` e `id`).
 - Los tres niveles se ejecutan con un unico comando (`pytest`) y generan un reporte HTML.
 - Cuando un test web falla se guarda una captura de pantalla automaticamente en `evidencias/`.
@@ -23,9 +23,10 @@
 | UT-01 | Unitario | fizzbuzz(6) | 'Fizz' |
 | UT-02 | Unitario | fizzbuzz(10) | 'Buzz' |
 | UT-03 | Unitario | fizzbuzz(15) | 'FizzBuzz' |
-| API-01 | API | POST /pet con una mascota nueva | codigo 200 y el nombre enviado |
+| API-01 | API | POST /pet con una mascota nueva | codigo 200 y el json con los datos enviados (la API agrega `tags: []`) |
 | API-02 | API | GET /pet/findByStatus?status=available | codigo 200 y lista con mascotas |
-| API-03 | API | GET /pet/0 (no existe) | codigo 404 |
+| API-03 | API | GET /pet/987654 (mascota creada antes en el mismo test) | codigo 200 y el json completo de la mascota |
+| API-04 | API | GET /pet/0 (no existe) | codigo 404 y el json `{"code": 1, "type": "error", "message": "Pet not found"}` |
 | UI-01 | UI | Carga inicial | se ve el catalogo y el carrito dice `cart (0)` |
 | UI-02 | UI | Agregar un Espresso | el carrito dice `cart (1)` y el total es $10.00 |
 | UI-03 | UI | Comprar Espresso y Cappuccino completando nombre y email | aparece "Thanks for your purchase" |
@@ -44,14 +45,14 @@
 
 ## 5. Resultados obtenidos
 
-- Tests ejecutados: **9**
-- Aprobados: **9**
+- Tests ejecutados: **10**
+- Aprobados: **10**
 - Fallidos: **0**
 - Tiempo total aproximado: 18 segundos
 - Reporte: `reportes/reporte.html`
 - Evidencias: `evidencias/ui1_carga_inicial.png`, `ui2_agregar_producto.png` y `ui3_compra_completa.png`
 - Se verifico tambien que, si un test web falla, se genera una captura `ERROR_<nombre del test>.png` en `evidencias/`.
-- Pipeline de GitHub Actions (workflow "Tests"): se ejecuta en cada push a `main`. En la ultima ejecucion corrieron los 9 tests y todos pasaron (`9 passed`). El reporte HTML y las evidencias quedan disponibles en `/reportes` y `/evidencias`.
+- Pipeline de GitHub Actions (workflow "Tests"): se ejecuta en cada push a `main`. En la ultima ejecucion corrieron los 10 tests y todos pasaron (`10 passed`). El reporte HTML y las evidencias quedan disponibles en `/reportes` y `/evidencias`.
 
 ## 6. Incidencias encontradas
 

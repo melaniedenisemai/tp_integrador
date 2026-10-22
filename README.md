@@ -1,9 +1,9 @@
 # TP Integrador - Testing automatizado
 
-Trabajo practico con 9 tests automatizados en Python:
+Trabajo practico con 10 tests automatizados en Python:
 
 - 3 tests unitarios (pytest) sobre la funcion FizzBuzz
-- 3 tests de API (pytest + requests) sobre [Petstore](https://petstore.swagger.io)
+- 4 tests de API (pytest + requests) sobre [Petstore](https://petstore.swagger.io)
 - 3 tests de UI (pytest + Selenium) sobre [Coffee Cart](https://coffee-cart.app/)
 
 ## Estructura
@@ -65,9 +65,10 @@ pytest web_tests
 
 | ID | Caso | Resultado esperado |
 |----|------|--------------------|
-| API-01 | POST /pet (crear mascota) | codigo 200 y el nombre enviado |
+| API-01 | POST /pet (crear mascota) | codigo 200 y el json con los datos enviados (la API agrega `tags: []`) |
 | API-02 | GET /pet/findByStatus?status=available | codigo 200 y lista con mascotas |
-| API-03 | GET /pet/0 (no existe) | codigo 404 |
+| API-03 | GET /pet/987654 (mascota creada antes en el mismo test) | codigo 200 y el json completo de la mascota |
+| API-04 | GET /pet/0 (no existe) | codigo 404 y el json `{"code": 1, "type": "error", "message": "Pet not found"}` |
 
 ### UI
 
