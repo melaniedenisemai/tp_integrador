@@ -51,7 +51,7 @@
 - Reporte: `reportes/reporte.html`
 - Evidencias: `evidencias/ui1_carga_inicial.png`, `ui2_agregar_producto.png` y `ui3_compra_completa.png`
 - Se verifico tambien que, si un test web falla, se genera una captura `ERROR_<nombre del test>.png` en `evidencias/`.
-
+- Pipeline de GitHub Actions (workflow "Tests"): se ejecuta en cada push a `main`. En la ultima ejecucion corrieron los 9 tests y todos pasaron (`9 passed`). El reporte HTML y las evidencias quedan disponibles en `/reportes` y `/evidencias`.
 
 ## 6. Incidencias encontradas
 
@@ -61,6 +61,6 @@ No se encontraron defectos en las aplicaciones probadas, pero si surgieron estas
 
 ## 7. Mejoras propuestas
 
-- Usar **datos externos** (CSV o JSON) para probar varias combinaciones de cafes y precios (tests data driven).
+- Usar **datos externos** (CSV o JSON) para probar varias combinaciones de cafes y precios.
 - Agregar mas casos de UI: eliminar productos, validacion de campos obligatorios y descuentos emergentes.
-- Agregar mas casos de API: actualizar y borrar mascotas, y usar un servidor propio o un mock para no depender de la API publica.
+- Agregar mas casos de API: actualizar y borrar mascotas.
