@@ -30,8 +30,6 @@ python -m venv .venv
 pip install -r requirements.txt
 ```
 
-(en Linux/Mac el activate es `source .venv/bin/activate`)
-
 ## Como ejecutar
 
 Todos los tests juntos:
@@ -72,6 +70,7 @@ pytest web_tests
 |----|------|--------------------|
 | UI-01 | Abrir la pagina | se ve el catalogo y el carrito dice `cart (0)` |
 | UI-02 | Agregar un Espresso | el carrito dice `cart (1)` y el total es $10.00 |
+| UI-02-bis | Agregar un Espresso | el carrito dice `cart (1)` y el total NO es $1500 |
 | UI-03 | Comprar Espresso y Cappuccino completando nombre y email | aparece el mensaje "Thanks for your purchase" |
 
 ## Evidencias
